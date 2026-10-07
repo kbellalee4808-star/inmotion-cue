@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>INMOTION 설명회 · 진행 큐시트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C; --gold:#D4A94A; --ivory:#FAF7F2; --ash:#F1ECE3;
+  --bg:var(--ivory); --paper:#FFFFFF; --ink:#1B2A3A; --muted:#6B7280;
+  --line:#E4DCCB; --check:#FFF6E0; --checkink:#8A6410;
+  --now:#1B3A5C; --nowink:#FFFFFF;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1B2A; --paper:#172638; --ink:#EEE7D8; --muted:#A8B0BD;
+    --line:#2A3B50; --check:#3A2F14; --checkink:#F0CF7A; --ash:#1F3045;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1B2A; --paper:#172638; --ink:#EEE7D8; --muted:#A8B0BD;
+  --line:#2A3B50; --check:#3A2F14; --checkink:#F0CF7A; --ash:#1F3045;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 92px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:16px;line-height:1.55;word-break:keep-all;-webkit-font-smoothing:antialiased}
+.wrap{max-width:520px;margin:0 auto;padding:0 18px 80px}
+
+/* header */
+.head{padding:28px 0 14px}
+.head .date{color:var(--gold);font-weight:700;font-size:14px;letter-spacing:.02em}
+.head h1{margin:6px 0 4px;font-size:26px;line-height:1.25;font-weight:900;color:var(--ink)}
+.head p{margin:0;color:var(--muted);font-size:14px}
+
+/* timer bar */
+.timer{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;
+  background:var(--navy);color:#fff;border-radius:16px;padding:12px 14px;
+  display:flex;align-items:center;gap:12px;box-shadow:0 8px 24px rgba(27,58,92,.22)}
+.timer .clock{font-size:30px;font-weight:900;font-variant-numeric:tabular-nums;min-width:96px;line-height:1}
+.timer .stage{flex:1;min-width:0}
+.timer .stage b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.timer .stage span{font-size:12px;color:var(--gold);white-space:nowrap}
+.timer button{min-height:44px;min-width:56px;border:0;border-radius:10px;background:var(--gold);color:var(--navy);
+  font-weight:900;font-size:14px;font-family:inherit;cursor:pointer}
+.timer button.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45);min-width:44px}
+.timer .bar{position:absolute;left:14px;right:14px;bottom:6px;height:3px;background:rgba(255,255,255,.18);border-radius:2px;overflow:hidden}
+.timer .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .5s linear}
+.timer{position:sticky;padding-bottom:16px}
+@media (prefers-reduced-motion:reduce){.timer .bar i{transition:none}}
+
+/* runsheet */
+.runsheet{display:flex;gap:4px;margin:16px 0 6px}
+.runsheet a{flex:var(--w);min-height:30px;border-radius:6px;background:var(--ash);text-decoration:none;
+  color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.runsheet a.now{background:var(--navy);color:#fff}
+.runsheet a.done{opacity:.45}
+.legend{font-size:12px;color:var(--muted);margin:0 0 18px}
+
+/* section */
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:18px 16px 16px;margin:0 0 14px;position:relative}
+.sec.now{border-color:var(--navy);box-shadow:0 0 0 3px rgba(212,169,74,.35)}
+.sec .top{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.sec .top .n{font-size:13px;font-weight:900;color:var(--gold);min-width:20px}
+.sec .top h2{margin:0;font-size:19px;font-weight:900;flex:1;line-height:1.3}
+.sec .top time{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.sec .top time b{color:var(--ink)}
+.say{margin:0;padding:0;list-style:none}
+.say li{position:relative;padding:8px 0 8px 22px;border-top:1px dashed var(--line);font-size:15.5px}
+.say li:first-child{border-top:0}
+.say li::before{content:"";position:absolute;left:4px;top:16px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.say li small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--check);color:var(--checkink);vertical-align:2px;margin-left:4px}
+.bridge{margin:12px 0 0;padding:10px 12px;border-radius:10px;background:var(--ash);font-size:14px;color:var(--ink)}
+.bridge small{color:var(--muted);font-size:12px}.bridge::before{content:"넘어가기 ▸ ";color:var(--gold);font-weight:900}
+
+/* platform grid */
+.plat{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:6px 0 12px}
+.plat div{background:var(--ash);border-radius:10px;padding:10px 4px;text-align:center;font-size:12px;font-weight:700;line-height:1.2}
+.plat div em{display:block;font-style:normal;font-size:17px;margin-bottom:4px}
+
+/* before/after table */
+table{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0 4px}
+th,td{padding:8px 6px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
+th{color:var(--muted);font-weight:700;font-size:12px;border-top:0}
+td:first-child{color:var(--muted);width:42%}
+td:last-child{font-weight:700}
+
+/* action cards */
+.acts{display:grid;gap:8px;margin-top:6px}
+.acts div{background:var(--navy);color:#fff;border-radius:12px;padding:12px 14px;font-weight:700;font-size:15px}
+.acts div span{color:var(--gold);margin-right:8px}
+
+.note{margin:22px 0 0;padding:14px 16px;border-radius:14px;border:1px dashed var(--line);font-size:13px;color:var(--muted)}
+.note b{color:var(--ink)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="date">10월 8일 목요일 · 밤 9시 · 60분</div>
+    <h1>INMOTION 여행 설명회<br>진행 큐시트</h1>
+    <p>화면공유는 슬라이드 페이지 · 이 페이지는 진행자 폰용</p>
+  </div>
+
+  <div class="timer" id="timer">
+    <div class="clock" id="clock">00:00</div>
+    <div class="stage"><b id="stageName">시작 버튼을 누르면 시간이 갑니다</b><span id="stageLeft">총 60분</span></div>
+    <button id="startBtn" type="button">시작</button>
+    <button id="resetBtn" type="button" class="ghost" aria-label="처음으로">↺</button>
+    <div class="bar"><i id="barFill"></i></div>
+  </div>
+
+  <div class="runsheet" id="runsheet">
+    <a href="#s1" style="--w:5">오프닝</a>
+    <a href="#s2" style="--w:10">비전</a>
+    <a href="#s3" style="--w:10">WHY</a>
+    <a href="#s4" style="--w:15">HOW</a>
+    <a href="#s5" style="--w:10">Q&amp;A</a>
+    <a href="#s6" style="--w:10">챌린지</a>
+  </div>
+  <p class="legend">칸 너비 = 배정 시간. 누르면 그 섹션으로 이동해요.</p>
+
+  <section class="sec" id="s1" data-start="0" data-len="5">
+    <div class="top"><span class="n">1</span><h2>오프닝 · 벨라</h2><time>0:00–5:00 · <b>5분</b></time></div>
+    <ul class="say">
+      <li>오신 분들 환영 — 파트너님과 관심 있는 멤버님 함께<small>슬라이드 1 → 2 (오늘 순서)</small></li>
+      <li>오늘 한 가지만 가져가세요: <b>INMOTION은 순위가 아니라 선착순</b><small>슬라이드 3 · 9월 실적부터 이미 반영, 2027년 2월 28일까지</small></li>
+      <li>발표자 소개 — K타나님 비전, 사가니님 WHY, 제가 점수, 마지막에 챌린지</li>
+    </ul>
+    <p class="bridge">"먼저 K타나님이 우리가 어디로 가는지 비전을 나눠주실게요." <small>→ 슬라이드 4</small></p>
+  </section>
+
+  <section class="sec" id="s2" data-start="5" data-len="10">
+    <div class="top"><span class="n">2</span><h2>비전 · K타나</h2><time>5:00–15:00 · <b>10분</b></time></div>
+    <ul class="say">
+      <li>슬라이드 4 띄워두고 화면공유 유지</li>
+      <li>8분쯤 채팅창에 "2분 남았어요" 살짝 보내기<small>시간 지킴이는 벨라</small></li>
+    </ul>
+    <p class="bridge">"감사해요. 그럼 왜 지금이어야 하는지, 사가니님." <small>→ 슬라이드 5</small></p>
+  </section>
+
+  <section class="sec" id="s3" data-start="15" data-len="10">
+    <div class="top"><span class="n">3</span><h2>WHY · 사가니</h2><time>15:00–25:00 · <b>10분</b></time></div>
+    <ul class="say">
+      <li>슬라이드 5 띄워두기</li>
+      <li>8분쯤 "2분 남았어요" 채팅</li>
+    </ul>
+    <p class="bridge">"이제 어떻게 하면 되는지, 숫자로 보여드릴게요." <small>→ 슬라이드 6</small></p>
+  </section>
+
+  <section class="sec" id="s4" data-start="25" data-len="15">
+    <div class="top"><span class="n">4</span><h2>HOW 점수 · 벨라</h2><time>25:00–40:00 · <b>15분</b></time></div>
+    <ul class="say">
+      <li><b>세 단계</b> 150 / 240 / 335점 → 여행 쿠폰 ~$2,000 / $2,500 / $3,500<small>슬라이드 7 · 쿠폰은 2027년 지정 크루즈 4개 중 하나 · 400자리 차면 조기 종료</small></li>
+      <li><b>직추 점수</b> PREMIUM 20 · CLASSIC 10 · STARTER 5, 재활성화 제외<small>슬라이드 8 · 1단계는 내 직추만 인정</small></li>
+      <li><b>팀 점수</b> 2레벨 3·2점, 3레벨 2·1점 — 2·3단계부터 팀이 힘을 씀<small>슬라이드 9</small></li>
+      <li><b>몇 명이면 될까</b> PREMIUM 8명 = 160점, 딱 맞춘 조합은 한 명 빠지면 무너짐<small>슬라이드 10</small></li>
+      <li><b>한 줄: PREMIUM 10명, 12월 전</b> — 천천히 또박또박<small>슬라이드 11</small></li>
+      <li><b>혼자 말고 같이</b> 내 파트너의 1단계가 내 2·3단계를 채움<small>슬라이드 12 · 멤버님들께: 파트너가 되면 이 레이스에 함께할 수 있어요</small></li>
+    </ul>
+    <p class="bridge">"궁금한 거 많으시죠? K타나님과 이안이 받아볼게요." <small>→ 슬라이드 13</small></p>
+  </section>
+
+  <section class="sec" id="s5" data-start="40" data-len="10">
+    <div class="top"><span class="n">5</span><h2>Q&amp;A · K타나 × 이안</h2><time>40:00–50:00 · <b>10분</b></time></div>
+    <ul class="say">
+      <li>채팅 질문 벨라가 골라서 전달 — 같은 질문은 묶기</li>
+      <li>자주 나올 질문: 취소·환불 시 점수<small>"규정이 아직 안 나와서 확인되면 안내드릴게요" · 그래서 여유 2명</small></li>
+      <li>일반 멤버 활성화 점수<small>"점수 확인 중이에요" — 숫자 약속하지 않기</small></li>
+    </ul>
+    <p class="bridge">"혼자 하면 어렵고, 같이 하면 갑니다. 마지막으로 챌린지." <small>→ 슬라이드 14</small></p>
+  </section>
+
+  <section class="sec" id="s6" data-start="50" data-len="10">
+    <div class="top"><span class="n">6</span><h2>여행 가는 챌린지 · 벨라</h2><time>50:00–60:00 · <b>10분</b></time></div>
+    <ul class="say">
+      <li><b>1기 10월 15일 시작</b> · 3주 과정 · 매일 할 일 하나<small>슬라이드 14</small></li>
+      <li>목요일 밤 9시 일하는 줌에서 점수 같이 보기</li>
+      <li><b>같이 +α — 3주 과정 챌린지에서 일하는 법을 알려드려요</b><small>여행 쿠폰 가는 길 = MD 가는 길 · MD 조건은 말로 짧게 연결</small></li>
+      <li>신청은 구글폼 — 링크를 채팅창에 바로 올리기</li>
+    </ul>
+  </section>
+
+  <div class="acts" style="margin-top:4px">
+    <div><span>✓</span>마무리: "12월 전에 같이 확정해요"</div>
+  </div>
+
+  <p class="note"><b>시작 전 체크</b><br>
+  K타나·사가니·이안 공동호스트 지정 · 녹화 켜기 · 구글폼 링크 복사해두기 · 슬라이드 1번 띄워두기<br>
+  발표 기준 내용이며 세부 조건은 회사 공식 안내를 따릅니다.</p>
+</div>
+
+<script>
+(function(){
+  var TOTAL=60*60, start=null, tick=null;
+  var clock=document.getElementById('clock'), name=document.getElementById('stageName'),
+      left=document.getElementById('stageLeft'), fill=document.getElementById('barFill'),
+      startBtn=document.getElementById('startBtn'), resetBtn=document.getElementById('resetBtn');
+  var secs=[].slice.call(document.querySelectorAll('.sec'));
+  var runs=[].slice.call(document.querySelectorAll('#runsheet a'));
+  function pad(n){return (n<10?'0':'')+n}
+  function fmt(s){return pad(Math.floor(s/60))+':'+pad(s%60)}
+  function render(){
+    var el=start?Math.floor((Date.now()-start)/1000):0;
+    clock.textContent=fmt(Math.min(el,TOTAL));
+    fill.style.width=Math.min(100,el/TOTAL*100)+'%';
+    var cur=-1;
+    secs.forEach(function(s,i){
+      var a=+s.dataset.start*60, b=a+(+s.dataset.len)*60;
+      var st=!start?'':(el<a?'':(el<b?'now':'done'));
+      s.classList.toggle('now',st==='now'); runs[i].classList.toggle('now',st==='now'); runs[i].classList.toggle('done',st==='done');
+      if(st==='now') cur=i;
+    });
+    if(!start){name.textContent='시작 버튼을 누르면 시간이 갑니다';left.textContent='총 60분';return}
+    if(cur<0){name.textContent='60분 종료';left.textContent=el>TOTAL?'+'+fmt(el-TOTAL)+' 초과':'';return}
+    var s=secs[cur];
+    name.textContent=cur+1+'. '+s.querySelector('h2').textContent;
+    var remain=(+s.dataset.start+ +s.dataset.len)*60-el;
+    left.textContent='이 섹션 '+fmt(remain)+' 남음 · 전체 '+fmt(TOTAL-el);
+  }
+  startBtn.addEventListener('click',function(){
+    if(start){return}
+    start=Date.now(); startBtn.textContent='진행 중'; startBtn.disabled=true;
+    render(); tick=setInterval(render,1000);
+    try{localStorage.setItem('inmCueStart',String(start))}catch(e){}
+  });
+  resetBtn.addEventListener('click',function(){
+    if(start && !confirm('타이머를 처음으로 되돌릴까요?')) return;
+    clearInterval(tick); start=null; startBtn.textContent='시작'; startBtn.disabled=false; render();
+    try{localStorage.removeItem('inmCueStart')}catch(e){}
+  });
+  try{
+    var saved=+localStorage.getItem('inmCueStart');
+    if(saved && Date.now()-saved<2*60*60*1000){start=saved;startBtn.textContent='진행 중';startBtn.disabled=true;tick=setInterval(render,1000)}
+  }catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>
